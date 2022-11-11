@@ -1,8 +1,14 @@
+import { Routes, Route } from "react-router-dom";
+import { Home, CarsList } from "./container";
 
 function App() {
   return (
-    <div className="App">Home
-    </div>
+    <>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/carslist" element={<CarsList />} />
+      </Routes>
+    </>
   );
 }
 
