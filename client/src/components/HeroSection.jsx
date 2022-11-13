@@ -1,13 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {
-  streetIcon,
-  mailIcon,
-  phoneIcon,
-  logo,
-  background,
-  searchIcon,
-} from "../images";
+import { streetIcon, mailIcon, phoneIcon, logo, searchIcon } from "../images";
 
 const HeroSection = () => {
   return (
@@ -55,7 +48,7 @@ const HeroSection = () => {
           <div className="flex items-end w-full h-full p-30 mt-32 bg-white rounded-lg drop-shadow-customShadow">
             <div className="mr-25">
               <p className="text-xl">Brand Name</p>
-              <select className="w-250 h-50 outline-none bg-gray border-grayBorder rounded-md ">
+              <select className="w-250 h-50 outline-none bg-gray border-grayBorder rounded-md">
                 <option value="volvo">Any</option>
                 <option value="saab">Saab</option>
                 <option value="mercedes">Mercedes</option>
@@ -87,7 +80,6 @@ const HeroSection = () => {
               <img src={searchIcon} alt="search" className="w-5 h-5 mr-2.5" />
               Search
             </Link>
-            <a href="#"></a>
           </div>
         </div>
       </div>
