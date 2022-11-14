@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { streetIcon, mailIcon, phoneIcon, logo, searchIcon } from "../images";
+import { Navbar } from "../components";
 
 const HeroSection = () => {
   return (
     <>
-      <div class="h-50 bg-mainColor px-150 flex justify-end items-center">
+      {/* <div class="h-50 bg-mainColor px-150 flex justify-end items-center">
         <div className="flex items-center">
           <img src={streetIcon} alt="street-icon" />
           <p className="ml-2.5 text-white">Street Address, City, State</p>
@@ -37,7 +38,8 @@ const HeroSection = () => {
             Contact
           </a>
         </div>
-      </div>
+      </div> */}
+      <Navbar />
       <div className="relative w-full h-595 bg-backgroundImg">
         <div className="w-full h-full bg-black opacity-50"></div>
         <p className="px-150 pt-100 absolute top-0 left-0 text-white text-7xl font-bold font-sans">
