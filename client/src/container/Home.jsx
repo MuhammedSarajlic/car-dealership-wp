@@ -4,6 +4,7 @@ import {
   FeatureSection,
   AboutSection,
   ContactSection,
+  FooterSection,
 } from "../components";
 
 const Home = () => {
@@ -13,6 +14,7 @@ const Home = () => {
       <FeatureSection />
       <AboutSection />
       <ContactSection />
+      <FooterSection />
     </>
   );
 };
