@@ -28,7 +28,10 @@ const FeatureSection = () => {
       <div className="px-150 w-full h-453 my-100">
         <div className="bg-white w-full h-full flex">
           {featureCars.map((car) => (
-            <Link className="w-1/3 h-453 bg-mainColor mr-15 rounded-xl overflow-hidden">
+            <Link
+              to="/cars/:id"
+              className="w-1/3 h-453 bg-mainColor mr-15 rounded-xl overflow-hidden"
+            >
               <img
                 src={car.imageUrl}
                 alt="feature-img"
@@ -51,7 +54,7 @@ const FeatureSection = () => {
       <div className="flex px-150 items-center justify-center">
         <div className="h-0.5 w-1/2 bg-grayline"></div>
         <Link
-          to="/carslist"
+          to="/cars"
           className="flex items-center justify-center px-15 cursor-pointer"
         >
           <p className="text-xl font-bold pr-10 whitespace-nowrap leading-7">

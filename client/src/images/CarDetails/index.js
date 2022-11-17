@@ -1,0 +1,9 @@
+export { default as mailIcon } from "../CarDetails/mailIcon.png";
+export { default as img } from "../CarDetails/img7.jpg";
+export { default as arrowLeft } from "../CarDetails/arrowLeft.png";
+export { default as arrowRight } from "../CarDetails/arrowRight.png";
+export { default as roadIcon } from "../CarDetails/roadIcon.png";
+export { default as calendarIcon } from "../CarDetails/calendarIcon.png";
+export { default as carEngineIcon } from "../CarDetails/carEngineIcon.png";
+export { default as gearboxIcon } from "../CarDetails/gearboxIcon.png";
+export { default as gasStationIcon } from "../CarDetails/gasStationIcon.png";

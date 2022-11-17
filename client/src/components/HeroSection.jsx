@@ -4,9 +4,11 @@ import { searchIcon } from "../images";
 import { Navbar } from "../components";
 
 const HeroSection = () => {
+  const style = "sticky top-0 z-50";
+
   return (
     <>
-      <Navbar />
+      <Navbar style={style} />
       <div className="relative w-full h-595 bg-backgroundImg">
         <div className="w-full h-full bg-black opacity-50"></div>
         <p className="px-150 pt-100 absolute top-0 left-0 text-white text-7xl font-bold font-sans">
@@ -43,7 +45,7 @@ const HeroSection = () => {
               </select>
             </div>
             <Link
-              to="/carslist"
+              to="/cars"
               className="w-250 h-50 bg-mainColor flex justify-center items-center rounded-md text-xl text-white"
             >
               <img src={searchIcon} alt="search" className="w-5 h-5 mr-2.5" />

@@ -34,7 +34,11 @@ const ListedCars = () => {
       <div className="flex flex-col">
         {carsCollection.map((car, i) => (
           <>
-            <Link key={i} className="flex justify-between w-full h-120 my-30">
+            <Link
+              to={`/cars/${car.id}`}
+              key={i}
+              className="flex justify-between w-full h-120 my-30"
+            >
               <div className="w-190 mr-10">
                 <img
                   src={car.displayImageUrl}
