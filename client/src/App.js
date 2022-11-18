@@ -5,7 +5,7 @@ import { FooterSection } from "./components";
 import CarDetails from "./components/CarDetails";
 import { Home, CarsList } from "./container";
 import { db } from "./Firebase/Firebase";
-// import { v4 } from "uuid";
+import ScrollToTop from "./functions/ScrollToTop";
 
 function App() {
   const [carsCollection, setCarsCollection] = useState([]);
@@ -23,6 +23,7 @@ function App() {
 
   return (
     <>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home carsCollection={carsCollection} />} />
         <Route

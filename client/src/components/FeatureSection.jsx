@@ -1,24 +1,8 @@
 import React from "react";
 import rightArrow from "../images/FeatureSectionImages/rightArrow.png";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../Firebase/Firebase";
 
 const FeatureSection = ({ carsCollection }) => {
-  const [featureCars, setFeatureCars] = useState([]);
-
-  // const featureCarsCollectionRef = collection(db, "cars");
-
-  // const getCarsList = async () => {
-  //   const data = await getDocs(featureCarsCollectionRef);
-  //   setFeatureCars(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-  // };
-
-  // useEffect(() => {
-  //   getCarsList();
-  // }, []);
-
   return (
     <div className="mt-82">
       <p className="text-2xl text-center text-mainColor">
