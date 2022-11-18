@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import {
   mailIcon,
@@ -11,8 +11,20 @@ import {
   gearboxIcon,
   gasStationIcon,
 } from "../images/CarDetails";
+import { useParams } from "react-router-dom";
 
-const CarDetails = () => {
+const CarDetails = ({ carsCollection }) => {
+  const [currentCar, setCurrentCar] = useState({});
+  const { id } = useParams();
+
+  const findCurrentCar = () => {
+    setCurrentCar(carsCollection.find((car) => car.id == id));
+  };
+
+  useEffect(() => {
+    findCurrentCar();
+  });
+
   return (
     <>
       <Navbar />
@@ -20,7 +32,11 @@ const CarDetails = () => {
         <div className="w-750 h-full mr-30">
           <div className="w-full h-600 bg-white rounded-xl overflow-hidden">
             <div className="w-750 h-450 relative overflow-hidden">
-              <img src={img} alt="" />
+              <img
+                src={currentCar.displayImageUrl}
+                alt=""
+                className="w-full h-full"
+              />
               <div className="absolute bg-white p-15 rounded-full opacity-90 top-45 left-5 cursor-pointer">
                 <img src={arrowLeft} alt="" />
               </div>
@@ -50,14 +66,18 @@ const CarDetails = () => {
                 <img src={roadIcon} alt="" />
                 <div className="ml-10">
                   <p className="leading-4 mb-1">Mileage</p>
-                  <p className="text-xl font-bold leading-5">28km</p>
+                  <p className="text-xl font-bold leading-5">
+                    {currentCar.mileage}km
+                  </p>
                 </div>
               </div>
               <div className="flex w-1/3">
                 <img src={calendarIcon} alt="" />
                 <div className="ml-10">
                   <p className="leading-4 mb-1">First Registration</p>
-                  <p className="text-xl font-bold leading-5">08/2017</p>
+                  <p className="text-xl font-bold leading-5">
+                    {currentCar.year}
+                  </p>
                 </div>
               </div>
               <div className="flex w-1/3">
@@ -123,10 +143,8 @@ const CarDetails = () => {
 
         <div className="w-360 h-full bg-white px-30 py-20 rounded-xl">
           <p className="text-xl font-bold leading-5 mb-10">BMW M4</p>
-          <p className="truncate mb-20">
-            CS M-PERFORMANCE/CARBON/LED/KAMERA/LEDER
-          </p>
-          <p className="text-2xl font-bold mb-10">€121,900</p>
+          <p className="truncate mb-20">{currentCar.title}</p>
+          <p className="text-2xl font-bold mb-10">€{currentCar.price}</p>
           <div className="w-full h-px bg-gray"></div>
           <p className="font-bold my-10">Autohaus Nordheim GmbH & Co. KG</p>
           <p className="text-sm mb-20">DE-74226 Nordheim bei Heilbronn</p>

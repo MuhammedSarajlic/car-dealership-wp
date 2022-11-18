@@ -1,22 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { db } from "../Firebase/Firebase";
-import { collection, getDocs } from "firebase/firestore";
 
-const ListedCars = () => {
-  const [carsCollection, setCarsCollection] = useState([]);
-
-  const carsCollectionRef = collection(db, "cars");
-
-  const getCarsCollection = async () => {
-    const data = await getDocs(carsCollectionRef);
-    setCarsCollection(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-  };
-
-  useEffect(() => {
-    getCarsCollection();
-  }, []);
-
+const ListedCars = ({ carsCollection }) => {
   return (
     <div className="bg-white w-810 h-full rounded-lg p-30">
       <div className="flex justify-between mb-20">
@@ -36,7 +21,7 @@ const ListedCars = () => {
           <>
             <Link
               to={`/cars/${car.id}`}
-              key={i}
+              key={car.id}
               className="flex justify-between w-full h-120 my-30"
             >
               <div className="w-190 mr-10">

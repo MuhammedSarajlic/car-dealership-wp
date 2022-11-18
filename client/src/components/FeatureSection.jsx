@@ -5,19 +5,19 @@ import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../Firebase/Firebase";
 
-const FeatureSection = () => {
+const FeatureSection = ({ carsCollection }) => {
   const [featureCars, setFeatureCars] = useState([]);
 
-  const featureCarsCollectionRef = collection(db, "feature_cars");
+  // const featureCarsCollectionRef = collection(db, "cars");
 
-  const getCarsList = async () => {
-    const data = await getDocs(featureCarsCollectionRef);
-    setFeatureCars(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-  };
+  // const getCarsList = async () => {
+  //   const data = await getDocs(featureCarsCollectionRef);
+  //   setFeatureCars(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  // };
 
-  useEffect(() => {
-    getCarsList();
-  }, []);
+  // useEffect(() => {
+  //   getCarsList();
+  // }, []);
 
   return (
     <div className="mt-82">
@@ -27,28 +27,31 @@ const FeatureSection = () => {
       <h2 className="text-7xl text-center font-bold uppercase">Feature Car</h2>
       <div className="px-150 w-full h-453 my-100">
         <div className="bg-white w-full h-full flex">
-          {featureCars.map((car) => (
-            <Link
-              to="/cars/:id"
-              className="w-1/3 h-453 bg-mainColor mr-15 rounded-xl overflow-hidden"
-            >
-              <img
-                src={car.imageUrl}
-                alt="feature-img"
-                className="h-1/2 w-full"
-              />
-              <div className="h-1/2 p-17">
-                <p className="text-white text-xl mb-10">{car.title}</p>
-                <div className="w-full h-px bg-white"></div>
-                <p className="text-white text-xl my-10">Year: {car.year}</p>
-                <p className="text-white text-xl mb-10">
-                  Mileage: {car.mileage} km
-                </p>
-                <div className="w-full h-px bg-white"></div>
-                <p className="text-white text-2xl mt-10">€ {car.price}</p>
-              </div>
-            </Link>
-          ))}
+          {carsCollection.map(
+            (car, i) =>
+              i < 3 && (
+                <Link
+                  to={`/cars/${car.id}`}
+                  className="w-1/3 h-453 bg-mainColor mr-15 rounded-xl overflow-hidden"
+                >
+                  <img
+                    src={car.displayImageUrl}
+                    alt="feature-img"
+                    className="h-1/2 w-full"
+                  />
+                  <div className="h-1/2 p-17">
+                    <p className="text-white text-xl mb-10">{car.title}</p>
+                    <div className="w-full h-px bg-white"></div>
+                    <p className="text-white text-xl my-10">Year: {car.year}</p>
+                    <p className="text-white text-xl mb-10">
+                      Mileage: {car.mileage} km
+                    </p>
+                    <div className="w-full h-px bg-white"></div>
+                    <p className="text-white text-2xl mt-10">€ {car.price}</p>
+                  </div>
+                </Link>
+              )
+          )}
         </div>
       </div>
       <div className="flex px-150 items-center justify-center">

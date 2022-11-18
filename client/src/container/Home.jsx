@@ -7,11 +7,11 @@ import {
   FooterSection,
 } from "../components";
 
-const Home = () => {
+const Home = ({ carsCollection }) => {
   return (
     <>
       <HeroSection />
-      <FeatureSection />
+      <FeatureSection carsCollection={carsCollection} />
       <AboutSection />
       <ContactSection />
     </>
