@@ -1,13 +1,41 @@
-import React from "react";
+import React, { useState, Suspense } from "react";
 import { Link } from "react-router-dom";
 import { searchIcon } from "../images";
 import { Navbar } from "../components";
+import { useEffect } from "react";
 
-const HeroSection = () => {
+const HeroSection = ({ carsCollection }) => {
   const style = "sticky top-0 z-50";
+  const [brandNames, setBrandNames] = useState([]);
+  const [models, setModels] = useState([]);
+  let brandName = [];
+  let model = [];
+
+  const addToArray = () => {
+    carsCollection.map((car) => {
+      const newCar = car.brandName;
+      const newModel = car.model;
+      if (!brandName.includes(newCar)) {
+        brandName.push(newCar);
+      }
+    });
+  };
+
+  const addToRealArr = () => {
+    brandName.map((car) => {
+      const newCar = car;
+      setBrandNames((car) => [...car, newCar]);
+    });
+  };
+
+  useEffect(() => {
+    addToArray();
+    addToRealArr();
+    console.log(brandNames);
+  }, []);
 
   return (
-    <>
+    <Suspense fallback={<h1>Loading profile...</h1>}>
       <Navbar style={style} />
       <div className="relative w-full h-595 bg-backgroundImg">
         <div className="w-full h-full bg-black opacity-50"></div>
@@ -19,12 +47,14 @@ const HeroSection = () => {
           <div className="flex items-end w-full h-full p-30 mt-32 bg-white rounded-lg drop-shadow-customShadow">
             <div className="mr-25">
               <p className="text-xl">Brand Name</p>
-              <select className="w-250 h-50 outline-none bg-gray border-grayBorder rounded-md">
-                <option value="volvo">Any</option>
-                <option value="saab">Saab</option>
-                <option value="mercedes">Mercedes</option>
-                <option value="audi">Audi</option>
-              </select>
+              <Suspense>
+                <select className="w-250 h-50 outline-none bg-gray border-grayBorder rounded-md">
+                  <option value="any">Any</option>
+                  {brandNames.map((car) => (
+                    <option value="any">{car}</option>
+                  ))}
+                </select>
+              </Suspense>
             </div>
             <div className="mr-25">
               <p className="text-xl">Model</p>
@@ -54,7 +84,7 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
-    </>
+    </Suspense>
   );
 };
 
