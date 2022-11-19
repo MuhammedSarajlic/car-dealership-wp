@@ -18,10 +18,9 @@ const ListedCars = ({ carsCollection }) => {
 
       <div className="flex flex-col">
         {carsCollection.map((car, i) => (
-          <>
+          <div key={car.id}>
             <Link
               to={`/cars/${car.id}`}
-              key={car.id}
               className="flex justify-between w-full h-120 my-30"
             >
               <div className="w-190 mr-10">
@@ -41,7 +40,7 @@ const ListedCars = ({ carsCollection }) => {
               </div>
             </Link>
             <div className="h-0.5 w-full bg-gray"></div>
-          </>
+          </div>
         ))}
       </div>
     </div>

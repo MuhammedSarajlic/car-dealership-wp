@@ -1,8 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { streetIcon, mailIcon, phoneIcon, logo } from "../images";
 
 const Navbar = ({ style }) => {
+  const activeStyle = "text-mainColor pl-8";
+
   return (
     <div className={style}>
       <div class="h-50 bg-mainColor px-150 flex justify-end items-center">
@@ -26,18 +28,36 @@ const Navbar = ({ style }) => {
           <img src={logo} alt="logo" className="w-144 h-72" />
         </Link>
         <div className="flex text-xl">
-          <Link to="/" className="pl-8">
-            Home
-          </Link>
-          <Link to="/cars" className="pl-8">
-            Cars for Sale
-          </Link>
-          <a href="#about" className="pl-8">
+          <NavLink to="/" className="pl-8">
+            {({ isActive }) => {
+              return isActive ? (
+                <>
+                  <p className="text-mainColor">Home</p>
+                  <div className="w-full h-0.5 bg-mainColor"></div>
+                </>
+              ) : (
+                "Home"
+              );
+            }}
+          </NavLink>
+          <NavLink to="/cars" className="pl-8">
+            {({ isActive }) => {
+              return isActive ? (
+                <>
+                  <p className="text-mainColor">Cars for Sale</p>
+                  <div className="w-full h-0.5 bg-mainColor"></div>
+                </>
+              ) : (
+                "Cars for Sale"
+              );
+            }}
+          </NavLink>
+          <NavLink to="/about" className="pl-8">
             About Us
-          </a>
-          <a href="#contact" className="pl-8">
+          </NavLink>
+          <NavLink to="/contac" className="pl-8">
             Contact
-          </a>
+          </NavLink>
         </div>
       </div>
     </div>

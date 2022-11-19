@@ -40,7 +40,7 @@ const CarDetails = ({ carsCollection }) => {
               <div className="absolute bg-white p-15 rounded-full opacity-90 top-45 left-5 cursor-pointer">
                 <img src={arrowLeft} alt="" />
               </div>
-              <div className="absolute bg-white p-15 rounded-full opacity-90 top-45 right-5 cursor-pointer">
+              <div className="absolute bg-white p-15 rounded-full opacity-90 top-45 right-5 cursor-pointer hover:opacity-100">
                 <img src={arrowRight} alt="" />
               </div>
             </div>

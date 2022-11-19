@@ -1,4 +1,5 @@
 import { collection, getDocs } from "firebase/firestore";
+import { Suspense } from "react";
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { FooterSection } from "./components";
@@ -22,7 +23,7 @@ function App() {
   }, []);
 
   return (
-    <>
+    <Suspense>
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home carsCollection={carsCollection} />} />
@@ -37,7 +38,7 @@ function App() {
         <Route path="*" element={<h1>Not Found</h1>} />
       </Routes>
       <FooterSection />
-    </>
+    </Suspense>
   );
 }
 

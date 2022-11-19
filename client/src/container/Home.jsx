@@ -10,7 +10,7 @@ import {
 const Home = ({ carsCollection }) => {
   return (
     <>
-      <HeroSection />
+      <HeroSection carsCollection={carsCollection} />
       <FeatureSection carsCollection={carsCollection} />
       <AboutSection />
       <ContactSection />

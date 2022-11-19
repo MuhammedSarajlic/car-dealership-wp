@@ -15,6 +15,7 @@ const FeatureSection = ({ carsCollection }) => {
             (car, i) =>
               i < 3 && (
                 <Link
+                  key={car.id}
                   to={`/cars/${car.id}`}
                   className="w-1/3 h-453 bg-mainColor mr-15 rounded-xl overflow-hidden"
                 >
