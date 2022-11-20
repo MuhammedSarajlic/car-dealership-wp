@@ -1,5 +1,4 @@
 import { collection, getDocs } from "firebase/firestore";
-import { Suspense } from "react";
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { FooterSection } from "./components";
@@ -10,7 +9,11 @@ import ScrollToTop from "./functions/ScrollToTop";
 
 function App() {
   const [carsCollection, setCarsCollection] = useState([]);
-
+  const [searchQuery, setSearchQuery] = useState({
+    bn: "",
+    md: "",
+    yr: "",
+  });
   const carsCollectionRef = collection(db, "cars");
 
   const getCarsCollection = async () => {
@@ -20,16 +23,30 @@ function App() {
 
   useEffect(() => {
     getCarsCollection();
+    console.log(searchQuery);
   }, []);
 
   return (
-    <Suspense>
+    <>
       <ScrollToTop />
       <Routes>
-        <Route path="/" element={<Home carsCollection={carsCollection} />} />
+        <Route
+          path="/"
+          element={
+            <Home
+              carsCollection={carsCollection}
+              setSearchQuery={setSearchQuery}
+            />
+          }
+        />
         <Route
           path="/cars"
-          element={<CarsList carsCollection={carsCollection} />}
+          element={
+            <CarsList
+              carsCollection={carsCollection}
+              searchQuery={searchQuery}
+            />
+          }
         />
         <Route
           path="/cars/:id"
@@ -38,7 +55,7 @@ function App() {
         <Route path="*" element={<h1>Not Found</h1>} />
       </Routes>
       <FooterSection />
-    </Suspense>
+    </>
   );
 }
 

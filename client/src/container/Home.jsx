@@ -4,13 +4,15 @@ import {
   FeatureSection,
   AboutSection,
   ContactSection,
-  FooterSection,
 } from "../components";
 
-const Home = ({ carsCollection }) => {
+const Home = ({ carsCollection, setSearchQuery }) => {
   return (
     <>
-      <HeroSection carsCollection={carsCollection} />
+      <HeroSection
+        carsCollection={carsCollection}
+        setSearchQuery={setSearchQuery}
+      />
       <FeatureSection carsCollection={carsCollection} />
       <AboutSection />
       <ContactSection />

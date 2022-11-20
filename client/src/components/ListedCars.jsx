@@ -1,11 +1,39 @@
 import React from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const ListedCars = ({ carsCollection }) => {
+const ListedCars = ({ carsCollection, searchQuery }) => {
+  let filteredCars = carsCollection;
+
+  if (searchQuery.bn !== "") {
+    filteredCars = carsCollection.filter((item) => {
+      return item.brandName.toLowerCase() === searchQuery.bn;
+    });
+    console.log("Brand happening");
+    if (searchQuery.md !== "") {
+      filteredCars = carsCollection.filter((item) => {
+        return item.model.toLowerCase() === searchQuery.md;
+      });
+      console.log("Model happening");
+    }
+    if (searchQuery.yr !== "") {
+      filteredCars = carsCollection.filter((item) => {
+        return item.year === searchQuery.yr;
+      });
+      console.log("Year happening");
+    }
+  }
+
+  useEffect(() => {
+    console.log("hello");
+    // console.log(filteredCars);
+    // console.log(carsCollection);
+  }, [searchQuery]);
+
   return (
     <div className="bg-white w-810 h-full rounded-lg p-30">
       <div className="flex justify-between mb-20">
-        <p className="text-2xl">{carsCollection.length} cars matching</p>
+        <p className="text-2xl">{filteredCars.length} cars matching</p>
         <div>
           <select
             name="sorting-type"
@@ -17,7 +45,7 @@ const ListedCars = ({ carsCollection }) => {
       </div>
 
       <div className="flex flex-col">
-        {carsCollection.map((car, i) => (
+        {filteredCars?.map((car) => (
           <div key={car.id}>
             <Link
               to={`/cars/${car.id}`}
