@@ -1,34 +1,46 @@
 import React from "react";
+import { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const ListedCars = ({ carsCollection, searchQuery }) => {
+  const [sortType, setSortType] = useState("");
   let filteredCars = carsCollection;
 
   if (searchQuery.brandName !== "") {
     filteredCars = carsCollection.filter((item) => {
       return item.brandName.toLowerCase() === searchQuery.brandName;
     });
-    console.log("Brand happening");
     if (searchQuery.model !== "") {
       filteredCars = carsCollection.filter((item) => {
         return item.model.toLowerCase() === searchQuery.model;
       });
-      console.log("Model happening");
     }
     if (searchQuery.year !== "") {
       filteredCars = carsCollection.filter((item) => {
         return item.year === searchQuery.year;
       });
-      console.log("Year happening");
     }
   }
 
-  useEffect(() => {
-    console.log("hello");
-    // console.log(filteredCars);
-    // console.log(carsCollection);
-  }, [searchQuery]);
+  const handleSortChange = (e) => {
+    setSortType(e.target.value);
+    if (e.target.value === "lowprice") {
+      filteredCars = filteredCars.sort((a, b) => (a.price > b.price ? 1 : -1));
+    } else if (e.target.value === "highprice") {
+      filteredCars = filteredCars.sort((a, b) => (a.price < b.price ? 1 : -1));
+    } else if (e.target.value === "lowmileage") {
+      filteredCars = filteredCars.sort((a, b) =>
+        a.mileage > b.mileage ? 1 : -1
+      );
+    } else if (e.target.value === "highmileage") {
+      filteredCars = filteredCars.sort((a, b) =>
+        a.mileage < b.mileage ? 1 : -1
+      );
+    }
+  };
+
+  useEffect(() => {}, [searchQuery]);
 
   return (
     <div className="bg-white w-810 h-full rounded-lg p-30">
@@ -36,10 +48,16 @@ const ListedCars = ({ carsCollection, searchQuery }) => {
         <p className="text-2xl">{filteredCars.length} cars matching</p>
         <div>
           <select
+            value={sortType}
             name="sorting-type"
             className="outline-none bg-gray h-35 w-250 rounded-md"
+            onChange={handleSortChange}
           >
-            <option value="">Default sorting</option>
+            <option value="default">Default sorting</option>
+            <option value="lowprice">Price (lowest first)</option>
+            <option value="highprice">Price (highest first)</option>
+            <option value="lowmileage">Mileage (lowest first)</option>
+            <option value="highmileage">Mileage (highest first)</option>
           </select>
         </div>
       </div>
