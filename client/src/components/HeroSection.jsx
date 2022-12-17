@@ -1,10 +1,15 @@
-import React, { useState, Suspense } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { searchIcon } from "../images";
 import { Navbar } from "../components";
 import { useEffect } from "react";
 
-const HeroSection = ({ carsCollection, setSearchQuery, filterCars }) => {
+const HeroSection = ({
+  carsCollection,
+  setSearchQuery,
+  searchQuery,
+  filterCars,
+}) => {
   const [brandNames, setBrandNames] = useState([]);
   const [models, setModels] = useState([]);
   const [years, setYears] = useState([]);
@@ -48,24 +53,31 @@ const HeroSection = ({ carsCollection, setSearchQuery, filterCars }) => {
       item.brandName.toLowerCase() === e.target.value.toLowerCase() &&
         setModels((prevModels) => [...prevModels, model]);
     });
-    setSearchQuery((prev) => ({ ...prev, bn: e.target.value.toLowerCase() }));
+    setSearchQuery((prev) => ({
+      ...prev,
+      brandName: e.target.value.toLowerCase(),
+    }));
   };
 
   const handleModelChange = (e) => {
-    setSearchQuery((prev) => ({ ...prev, md: e.target.value.toLowerCase() }));
+    setSearchQuery((prev) => ({
+      ...prev,
+      model: e.target.value.toLowerCase(),
+    }));
   };
 
   const handleYearChange = (e) => {
-    setSearchQuery((prev) => ({ ...prev, yr: e.target.value.toLowerCase() }));
+    setSearchQuery((prev) => ({ ...prev, year: e.target.value.toLowerCase() }));
   };
 
   useEffect(() => {
+    console.log(carsCollection);
     addToArray();
     addToRealArr();
     setSearchQuery({
-      bn: "",
-      md: "",
-      yr: "",
+      brandName: "",
+      model: "",
+      year: "",
     });
   }, []);
 
@@ -97,6 +109,7 @@ const HeroSection = ({ carsCollection, setSearchQuery, filterCars }) => {
             <div className="mr-25">
               <p className="text-xl">Model</p>
               <select
+                disabled={searchQuery.brandName === ""}
                 className="w-250 h-50 outline-none bg-gray border-grayBorder rounded-md"
                 onChange={handleModelChange}
               >
@@ -115,9 +128,9 @@ const HeroSection = ({ carsCollection, setSearchQuery, filterCars }) => {
                 onChange={handleYearChange}
               >
                 <option value="any">Any</option>
-                {years.map((x) => (
-                  <option key={x} value={x}>
-                    {x}
+                {years.map((year) => (
+                  <option key={year} value={year}>
+                    {year}
                   </option>
                 ))}
               </select>
@@ -125,7 +138,7 @@ const HeroSection = ({ carsCollection, setSearchQuery, filterCars }) => {
             <Link
               to="/cars"
               className="w-250 h-50 bg-mainColor flex justify-center items-center rounded-md text-xl text-white"
-              onClick={filterCars}
+              //onClick={filterCars}
             >
               <img src={searchIcon} alt="search" className="w-5 h-5 mr-2.5" />
               Search

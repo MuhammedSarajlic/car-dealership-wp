@@ -5,20 +5,20 @@ import { Link } from "react-router-dom";
 const ListedCars = ({ carsCollection, searchQuery }) => {
   let filteredCars = carsCollection;
 
-  if (searchQuery.bn !== "") {
+  if (searchQuery.brandName !== "") {
     filteredCars = carsCollection.filter((item) => {
-      return item.brandName.toLowerCase() === searchQuery.bn;
+      return item.brandName.toLowerCase() === searchQuery.brandName;
     });
     console.log("Brand happening");
-    if (searchQuery.md !== "") {
+    if (searchQuery.model !== "") {
       filteredCars = carsCollection.filter((item) => {
-        return item.model.toLowerCase() === searchQuery.md;
+        return item.model.toLowerCase() === searchQuery.model;
       });
       console.log("Model happening");
     }
-    if (searchQuery.yr !== "") {
+    if (searchQuery.year !== "") {
       filteredCars = carsCollection.filter((item) => {
-        return item.year === searchQuery.yr;
+        return item.year === searchQuery.year;
       });
       console.log("Year happening");
     }

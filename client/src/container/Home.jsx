@@ -6,12 +6,13 @@ import {
   ContactSection,
 } from "../components";
 
-const Home = ({ carsCollection, setSearchQuery }) => {
+const Home = ({ carsCollection, setSearchQuery, searchQuery }) => {
   return (
     <>
       <HeroSection
         carsCollection={carsCollection}
         setSearchQuery={setSearchQuery}
+        searchQuery={searchQuery}
       />
       <FeatureSection carsCollection={carsCollection} />
       <AboutSection />

@@ -8,23 +8,29 @@ import { db } from "./Firebase/Firebase";
 import ScrollToTop from "./functions/ScrollToTop";
 
 function App() {
-  const [carsCollection, setCarsCollection] = useState([]);
+  const [carsCollection, setCarsCollection] = useState(null);
   const [searchQuery, setSearchQuery] = useState({
-    bn: "",
-    md: "",
-    yr: "",
+    brandName: "",
+    model: "",
+    year: "",
   });
   const carsCollectionRef = collection(db, "cars");
 
   const getCarsCollection = async () => {
     const data = await getDocs(carsCollectionRef);
-    setCarsCollection(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    const temp = await data.docs.map((doc) => ({
+      ...doc.data(),
+      id: doc.id,
+    }));
+    setCarsCollection(temp);
   };
 
   useEffect(() => {
     getCarsCollection();
-    console.log(searchQuery);
+    console.log(carsCollection);
   }, []);
+
+  if (!carsCollection) return <div>Loading...</div>;
 
   return (
     <>
@@ -36,6 +42,7 @@ function App() {
             <Home
               carsCollection={carsCollection}
               setSearchQuery={setSearchQuery}
+              searchQuery={searchQuery}
             />
           }
         />
